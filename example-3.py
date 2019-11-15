@@ -1,10 +1,10 @@
 import asyncio
-from concurrent import futures
 from time import sleep
+
 
 # ==========================
 # 
-#    library
+#    Library
 # 
 # ==========================
 # @asyncio.coroutine
@@ -21,9 +21,10 @@ async def doStaffAsync():
         await asyncio.sleep(0)
         print('[*] doStaffAsync result: {}'.format(i+1))
 
+
 # ==========================
 # 
-#    application
+#    Application Layer
 # 
 # ==========================
 # @asyncio.coroutine
@@ -42,48 +43,47 @@ def code_with_yield(label, **kwargs):
     print('[{}-down]'.format(label))
 
 
+# ==========================
+# 
+#    index.py
+# 
+# ==========================
 def main():
     # 
-    # One
+    # Method One
     # 
     asyncio.wait([
         asyncio.ensure_future(code_with_async('code_with_async', sleep_time=2)),
         asyncio.ensure_future(code_with_yield('code_with_yield', sleep_time=2))
     ])
     # 
-    # Two
+    # Method Two
     # 
     # asyncio.ensure_future(code_with_async('code_with_async', sleep_time=2))
     # asyncio.ensure_future(code_with_yield('code_with_yield', sleep_time=2))
 
 
-# 
-#================================== 
-# 
-#         M   A   I   N
-# 
-#================================== 
-# 
-print('start application')
-loop = asyncio.get_event_loop()
-main()
-print('finish application')
+if __name__ == "__main__":
+    print('start application')
+    loop = asyncio.get_event_loop()
+    main()
+    print('finish application')
 
-# 
-# task base loop
-# B L O C K I N G - M O D E
-# 
-#   :(
-# 
-# loop.run_until_complete(speak_async())
+    # 
+    # task base loop
+    # B L O C K I N G - M O D E
+    # 
+    #   :(
+    # 
+    # loop.run_until_complete(speak_async())
 
-# 
-# endless loop
-# 
-loop.run_forever()
+    # 
+    # endless loop
+    # 
+    loop.run_forever()
 
-# 
-# close loop
-# never used
-# 
-loop.close()
+    # 
+    # close loop
+    # never used
+    # 
+    loop.close()
